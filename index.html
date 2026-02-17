@@ -173,11 +173,11 @@ function next(answer){
 function send(){
  const contact=document.getElementById("contact").value;
 
- fetch("https://api.telegram.org/botТОКЕН/sendMessage",{
+ fetch("https://api.telegram.org/bot7917232792:AAGOFKDGJxgSE11s0csGEaunOcNr71atQzY/sendMessage",{
  method:"POST",
  headers:{'Content-Type':'application/json'},
  body:JSON.stringify({
-  chat_id:"ТВОЙ_CHAT_ID",
+  chat_id:"436256257",
   text:`Новая заявка!\n${JSON.stringify(data,null,2)}\nКонтакт: ${contact}`
  })
  });
