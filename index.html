@@ -1,96 +1,113 @@
-<script>
-let step = 0;
-let data = {};
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adria Travel — подбор тура</title>
 
-function startQuiz(){
-  document.getElementById("quiz").style.display="block";
-  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
-  show();
-}
+  <style>
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#222;}
+    .hero{background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover;height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;}
+    .hero-box{background:rgba(0,0,0,.45);padding:40px;border-radius:18px;max-width:600px;}
+    h1{font-size:36px;margin:0 0 10px;}
+    .sub{font-size:18px;margin:0 0 25px;}
+    .cta{background:#ff7a00;color:#fff;padding:18px 28px;border:none;border-radius:50px;font-size:18px;cursor:pointer;}
+    .quiz{display:none;padding:30px;max-width:500px;margin:40px auto;background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.15);text-align:center;}
+    .qbtn{display:block;width:100%;margin:8px 0;padding:14px;border-radius:12px;border:1px solid #ddd;background:#fafafa;cursor:pointer;}
+    .qbtn:hover{background:#ff7a00;color:#fff;}
+    input{width:100%;padding:14px;border-radius:12px;border:1px solid #ccc;margin-top:12px;}
+    .send{margin-top:14px;background:#28a745;color:#fff;border:none;padding:14px;border-radius:12px;font-size:16px;cursor:pointer;width:100%;}
+  </style>
+</head>
 
-function show(){
-  const q=document.getElementById("quiz");
+<body>
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Подберём идеальный тур за 5 минут ✈️</h1>
+      <div class="sub">Ответьте на 4 вопроса и получите варианты сегодня</div>
+      <button class="cta" id="startBtn">Подобрать тур</button>
+    </div>
+  </section>
 
-  if(step===0){
-    q.innerHTML=`<h2>Куда хотите поехать?</h2>
-    <button class="qbtn" onclick="next('Турция')">Турция</button>
-    <button class="qbtn" onclick="next('Египет')">Египет</button>
-    <button class="qbtn" onclick="next('ОАЭ')">ОАЭ</button>
-    <button class="qbtn" onclick="next('Подберите')">Не знаю</button>`;
-  }
+  <div id="quiz" class="quiz"></div>
 
-  else if(step===1){
-    q.innerHTML=`<h2>Сколько человек?</h2>
-    <button class="qbtn" onclick="next('1')">1</button>
-    <button class="qbtn" onclick="next('2')">2</button>
-    <button class="qbtn" onclick="next('Семья')">Семья</button>
-    <button class="qbtn" onclick="next('Компания')">Компания</button>`;
-  }
+  <script>
+    let step = 0;
+    let data = {};
 
-  else if(step===2){
-    q.innerHTML=`<h2>Ваш бюджет на человека?</h2>
-    <button class="qbtn" onclick="next('до 80к')">до 80к</button>
-    <button class="qbtn" onclick="next('80-120к')">80–120к</button>
-    <button class="qbtn" onclick="next('120-180к')">120–180к</button>
-    <button class="qbtn" onclick="next('180к+')">180к+</button>`;
-  }
+    document.getElementById("startBtn").addEventListener("click", startQuiz);
 
-  else if(step===3){
-    q.innerHTML=`<h2>Когда хотите вылет?</h2>
-    <button class="qbtn" onclick="next('Срочно')">Срочно</button>
-    <button class="qbtn" onclick="next('В этом месяце')">В этом месяце</button>
-    <button class="qbtn" onclick="next('1-3 месяца')">1–3 месяца</button>
-    <button class="qbtn" onclick="next('Просто смотрю')">Просто смотрю</button>`;
-  }
+    function startQuiz(){
+      document.getElementById("quiz").style.display = "block";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      show();
+    }
 
-  else if(step===4){
-    q.innerHTML=`<h2>Куда отправить подбор?</h2>
-    <input id="contact" placeholder="@telegram или номер WhatsApp">
-    <button class="send" onclick="send()">Получить варианты</button>`;
-  }
-}
+    function show(){
+      const q = document.getElementById("quiz");
 
-function next(answer){
-  data["q"+step]=answer;
-  step++;
-  show();
-}
+      if(step === 0){
+        q.innerHTML = `<h2>Куда хотите поехать?</h2>
+          <button class="qbtn" onclick="next('Турция')">Турция</button>
+          <button class="qbtn" onclick="next('Египет')">Египет</button>
+          <button class="qbtn" onclick="next('ОАЭ')">ОАЭ</button>
+          <button class="qbtn" onclick="next('Подберите')">Не знаю</button>`;
+      } else if(step === 1){
+        q.innerHTML = `<h2>Сколько человек?</h2>
+          <button class="qbtn" onclick="next('1')">1</button>
+          <button class="qbtn" onclick="next('2')">2</button>
+          <button class="qbtn" onclick="next('Семья')">Семья</button>
+          <button class="qbtn" onclick="next('Компания')">Компания</button>`;
+      } else if(step === 2){
+        q.innerHTML = `<h2>Ваш бюджет на человека?</h2>
+          <button class="qbtn" onclick="next('до 80к')">до 80к</button>
+          <button class="qbtn" onclick="next('80-120к')">80–120к</button>
+          <button class="qbtn" onclick="next('120-180к')">120–180к</button>
+          <button class="qbtn" onclick="next('180к+')">180к+</button>`;
+      } else if(step === 3){
+        q.innerHTML = `<h2>Когда хотите вылет?</h2>
+          <button class="qbtn" onclick="next('Срочно')">Срочно</button>
+          <button class="qbtn" onclick="next('В этом месяце')">В этом месяце</button>
+          <button class="qbtn" onclick="next('1-3 месяца')">1–3 месяца</button>
+          <button class="qbtn" onclick="next('Просто смотрю')">Просто смотрю</button>`;
+      } else if(step === 4){
+        q.innerHTML = `<h2>Куда отправить подбор?</h2>
+          <input id="contact" placeholder="@telegram или номер WhatsApp">
+          <button class="send" onclick="send()">Получить варианты</button>`;
+      }
+    }
 
-function send(){
-  const contact=document.getElementById("contact").value || "не указал";
+    function next(answer){
+      data["q" + step] = answer;
+      step++;
+      show();
+    }
 
-  const message =
+    function send(){
+      const contact = document.getElementById("contact").value || "не указал";
+
+      const message =
 `🧭 Новая заявка с сайта Adria Travel
 
-🌍 Направление: ${data.q0}
-👤 Туристы: ${data.q1}
-💰 Бюджет: ${data.q2}
-📅 Сроки: ${data.q3}
+🌍 Направление: ${data.q0 || "-"}
+👤 Туристы: ${data.q1 || "-"}
+💰 Бюджет: ${data.q2 || "-"}
+📅 Сроки: ${data.q3 || "-"}
 
 📞 Контакт: ${contact}
-
 #квиз`;
 
-  fetch("https://api.telegram.org/bot7917232792:AAGOFKDGJxgSE11s0csGEaunOcNr71atQzY/sendMessage",{
-    method:"POST",
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      chat_id:"436256257",
-      text: message
-    })
-  })
-  .then(res => res.json())
-  .then(res => {
-    if(res.ok){
-      document.getElementById("quiz").innerHTML="<h2>Спасибо! Заявка отправлена ✈️</h2>";
-    } else {
-      document.getElementById("quiz").innerHTML="<h2>Ошибка отправки. Напишите нам в Telegram вручную 🙏</h2>";
-      console.log(res);
+      fetch("https://api.telegram.org/bot7917232792:AAGOFKDGJxgSE11s0csGEaunOcNr71atQzY/sendMessage",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({
+          chat_id: "436256257",
+          text: message
+        })
+      });
+
+      document.getElementById("quiz").innerHTML = "<h2>Спасибо! Заявка отправлена ✈️</h2>";
     }
-  })
-  .catch(err=>{
-    document.getElementById("quiz").innerHTML="<h2>Ошибка соединения. Попробуйте ещё раз.</h2>";
-    console.log(err);
-  });
-}
-</script>
+  </script>
+</body>
+</html>
