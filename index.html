@@ -171,7 +171,37 @@ function next(answer){
 }
 
 function send(){
- const contact=document.getElementById("contact").value;
+const contact=document.getElementById("contact").value || "не указал";
+
+const country = data.q0 || "-";
+const people = data.q1 || "-";
+const budget = data.q2 || "-";
+const date = data.q3 || "-";
+
+const message =
+`🧭 Новая заявка с сайта Adria Travel
+
+🌍 Направление: ${country}
+👤 Туристы: ${people}
+💰 Бюджет: ${budget}
+📅 Сроки: ${date}
+
+📞 Контакт: ${contact}
+
+#квиз`;
+
+fetch("https://api.telegram.org/botТВОЙ_ТОКЕН/sendMessage",{
+method:"POST",
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+chat_id:"436256257",
+text: message
+})
+});
+
+document.getElementById("quiz").innerHTML="<h2>Заявка отправлена! Мы скоро напишем ✈️</h2>";
+}
+
 
  fetch("https://api.telegram.org/bot7917232792:AAGOFKDGJxgSE11s0csGEaunOcNr71atQzY/sendMessage",{
  method:"POST",
